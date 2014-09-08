@@ -1,0 +1,39 @@
+<div ng-controller="main">
+	<div id='modal' ng-controller="modalbox" class='check-element animate-show' ng-hide='modal'>
+		<div class='wrapper' ng-click="modal2()">
+			<div class='boxwrapper' ng-click='$event.stopPropagation()'><div id='close' ng-click='modal2()'>x</div><div id='m_box' ng-click='$event.stopPropagation()' ng-bind-html="inmodal" compile-template></div></div>
+		</div>
+	</div>
+
+	<h1 id='identity'>
+		<a href='/' class='inner header'>
+			<img id='logo' src='../img/logo.png'/>
+			<span>
+				The Opinionator
+				<span class='subline'>{{slogan}} since 2014</span>
+			</span>		
+		</a>
+		<div class='clearfix'></div>
+	</h1>
+	<div class='wrapper'>
+		<div class='content'>
+			<div class='big'>
+			<h2>The best unscientific research and a passionate belief in triviality has led to to 'The Opinionator' - an internet opinion hype machine.</h2>
+			<p>It strives to answer two fundamental questions:
+				<ol>
+					<li>What do you think about this</li>
+					<li>What do others think about that</li>
+				</ol>
+			</p>
+			<p>With these existential issues addressed, we will be ready for the return of our Llama overlords.</p>
+			</div>
+			<div class='small'>
+			<h2>But seriously:</h2>
+			<p>This is an Alpha, test release web-app built using Angular JS. I am building it in my spare time and will be releasing it under a GNU GPL license in due time.</p>
+			<p>The design intent is that it will be extremely easy to deploy on a standard Apache webserver so that everybody can start creating opinion streams.</p>
+			<p>If you want to find out more, contact me at:<br><br>michael@piquant.ie</p>
+			</div>
+			
+		</div>
+	</div>
+</div>

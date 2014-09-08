@@ -1,0 +1,65 @@
+<a id='vlogo' href='/#/'><img src="../img/logo.png"></a>
+<div class='clearfix'></div>
+<div id='main_question' ng-controller="main">
+	<h1><a target='_blank' href='https://twitter.com/search?q={{tw_type}}{{question}}'><span class='hashtag'>{{type}}</span><span class='hashtext'>{{question}}</span></a></h1>
+	<div id='modal' ng-controller="modalbox" class='check-element animate-show' ng-hide='modal'>
+		<div class='wrapper' ng-click="modal2()">
+			<div class='boxwrapper' ng-click='$event.stopPropagation()'><div id='close' ng-click='modal2()'>x</div><div id='m_box' ng-click='$event.stopPropagation()' ng-bind-html="inmodal" compile-template></div></div>
+		</div>
+	</div>
+</div>
+
+<div id='container'> 
+	<div ng-controller="Question">	
+		<form name='form_quest' ng-hide='form_hide'>
+			<div class="questions">
+				<div class='question'>
+					<div class='wrapper'>
+						<div class='inner' ng-bind-html="thisquest"></div>
+					</div>
+					<div class='countdown'>{{counter}}</div>
+				</div>
+				<div class='submitspacer' ng-hide='alldone'></div>
+				<div class='submitbuttons' ng-hide='alldone'>
+					<div class='submit'><span class='first' ng-class='active1' ng-click="changer(questions[count].id,'yes')">agree</span></div>					
+					<div class='submit'><span ng-class='active2' ng-click="changer(questions[count].id,'meh')">pass</span></div>
+					<div class='submit'><span class='last' ng-class='active3' ng-click="changer(questions[count].id,'no')">disagree</span></div>
+					<div class='clearfix'></div>
+				</div>
+									
+			</div>
+		</form>	
+	<div ng-controller="addQuestion" class='addquestion'>
+		<form name='add_quest' ng-hide="hidden_aq">
+			<div class='infield'><textarea name='textarea' id='textinput' ng-model='text' autofocus='true' ng-minlength='{{min}}' ng-maxlength='{{max}}'></textarea><label ng-hide="add_quest.textarea.$viewValue">You have {{remaining}} of your own opinions left to add.</label></div>
+			<div id='allowed'><span class='minallowed'>{{min}} characters minimum | </span><span class='maxallowed'>{{max-add_quest.textarea.$viewValue.length}} remaining</span></div>
+			<button ng-click='send(text,0)' ng-disabled="add_quest.$invalid || !add_quest.textarea.$viewValue">Submit</button>			
+		</form>
+		<div class='notice' ng-show="hidden_aq && active"><div class='inner'>{{notice}}</div></div>
+	</div>			
+		<div class='results grey' ng-hide="hidden_q">
+			<div class='prev_quest row'>"{{oldquest.quest.text}}"</div>
+			<div class='resultrows'>			
+				<div class='row small of'>Of<br><strong>{{oldquest.stats.total}}</strong><br>votes:</div>								
+				<div class='row small stats'> 
+					<div class='result'><div class='reply icon-up-bold'></div><div>{{oldquest.stats.yes}}%</div></div>
+					<div class='result'><div class='reply'>~</div><div>{{oldquest.stats.meh}}%</div></div>
+					<div class='result'><div class='reply icon-down-bold'></div><div>{{oldquest.stats.no}}%</div></div>
+					<div class='clearfix'></div>
+				</div>
+				<div class='clearfix'></div>
+			</div>
+			<div id='sharelinks'>
+				<div class='inner'>
+					<a ng-click="modal('link',oldquest)" class='icon-link icon' title='Get a link to this opinion'></a>
+					<a target="_blank" href="https://twitter.com/share?text={{oldquest.tweet}}&url={{oldquest.e_url}}" data-lang="en" class='icon-twitter icon'  title='Share this result on Twitter'></a>
+					<a ng-click="modal('email',oldquest)" class='icon-mail icon' title='Share this result by email'></a>
+					<div class='clearfix'></div>
+				</div>
+			</div>
+			<div class='clearfix'></div>
+		</div>
+	</div>
+
+
+</div>

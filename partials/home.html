@@ -1,0 +1,37 @@
+<div ng-controller="main">
+	<div id='modal' ng-controller="modalbox" class='check-element animate-show' ng-hide='modal'>
+		<div class='wrapper' ng-click="modal2()">
+			<div class='boxwrapper' ng-click='$event.stopPropagation()'><div id='close' ng-click='modal2()'>x</div><div id='m_box' ng-click='$event.stopPropagation()' ng-bind-html="inmodal" compile-template></div></div>
+		</div>
+	</div>
+
+	<h1 id='identity'>
+		<a href='/#/about' class='inner header'>
+			<img id='logo' src='../img/logo.png'/>
+			<span>
+				The Opinionator
+				<span class='subline'>{{slogan}} since 2014</span>
+			</span>		
+		</a>
+		<div class='clearfix'></div>
+	</h1>
+	<div ng-controller='hashcloud' id='hashcontainer' class='content'>	
+		<div ng-repeat="hash in hashes | orderBy:['sort','qcount*1'] : reverse='reverse'" class='hash'>
+			<div><a style='font-size:{{hash.scale}}em; line-height:1em' href='/#/{{hash.text}}/base'>{{hash.type}}{{hash.text}}</a></div>
+			<div class='stats'>{{hash.qcount}} opinions : {{hash.acount}} votes</div>
+		</div>
+		<div class='clearfix'></div>
+	</div>
+	<div id='hashadd' class='content'>
+		<div class='inner'>
+			<form ng-controller='addhash' name='addhash' ng-submit='subhash(newhash,type)' novalidate>
+				<input type='radio' value='@' ng-model='type' id='radio@'>
+				<label for='radio@' class='atl' ng-class="{active: rclassa}">@</label>
+				<input type='radio' value='#' ng-model='type' id='radio#'>
+				<label for='radio#' class='hashl' ng-class="{active: rclassh}">#</label>
+				<input type='text' name='newhash' ng-model='newhash' placeholder="Add Your Own" required/>
+				<input type='submit' value='submit' ng-disabled="addhash.$invalid"/>
+			</form>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,60 @@
+<div id='bigcontainer'>
+	<div id='main_question' ng-controller="main">
+		<div id='modal' ng-controller="modalbox" class='check-element animate-show' ng-hide='modal'>
+			<div class='wrapper' ng-click="modal2()">
+				<div class='boxwrapper' ng-click='$event.stopPropagation()'><div id='close' ng-click='modal2()'>x</div><div id='m_box' ng-click='$event.stopPropagation()' ng-bind-html="inmodal" compile-template></div></div>
+			</div>
+		</div>
+		<h2><a href='/#/{{question}}/base'>{{type}}{{question}}</a></h2>
+
+		<div ng-controller="data">
+			<table>
+				<thead>
+					<tr>
+						<th class='qblock'>
+							<div>
+								<a ng-click="orderByField='text'; reverseSort = !reverseSort">Question <span ng-show="orderByField == 'text'"><span ng-show="!reverseSort">&#9650;</span><span ng-show="reverseSort">&#9660;</span></span></a>
+							</div>
+						</th>
+						<th>
+							<a ng-click="orderByField='yes'; reverseSort = !reverseSort">Agree <span ng-show="orderByField == 'yes'"><span ng-show="!reverseSort">&#9650;</span><span ng-show="reverseSort">&#9660;</span></span></a>
+						</th>
+						<th>
+							<a ng-click="orderByField='meh'; reverseSort = !reverseSort">Pass<span ng-show="orderByField == 'meh'"><span ng-show="!reverseSort">&#9650;</span><span ng-show="reverseSort">&#9660;</span></span></a>
+						</th>
+						<th>
+							<a ng-click="orderByField='no'; reverseSort = !reverseSort">Disagree <span ng-show="orderByField == 'no'"><span ng-show="!reverseSort">&#9650;</span><span ng-show="reverseSort">&#9660;</span></span></a>
+						</th>
+						<th>
+							<a ng-click="orderByField='votes'; reverseSort = !reverseSort">Votes <span ng-show="orderByField == 'votes'"><span ng-show="!reverseSort">&#9650;</span><span ng-show="reverseSort">&#9660;</span></span></a>
+						</th>
+					</tr>
+				</thead>
+				<tr ng-repeat="quest in questions | orderBy:orderByField:reverseSort">
+						<td class='qblock'>
+							<div class='rowblock'>
+								{{quest.text}}						
+								<div id='sharelinks'>
+									<div class='inner'>		
+										<a ng-click="modal('link',quest)" class='icon-link icon' title='Get a link to this opinion'></a>
+										<a target="_blank" href="https://twitter.com/share?text={{quest.tweet}}&url={{quest.url}}" data-lang="en" class='icon-twitter icon'  title='Share this result on Twitter'></a>
+										<a ng-click="modal('email',quest)" class='icon-mail icon' title='Share this result by email'></a>
+										<div class='clearfix'></div>
+									</div>
+								</div>
+							</div>
+							
+						</td>
+						<td class='d_result'><div class='symbol icon-up-bold'></div><div>{{quest.yes}}%</div></td>
+						<td class='d_result'><div class='symbol'>~</div><div>{{quest.meh}}%</div></td>
+						<td class='d_result'><div class='symbol icon-down-bold'></div><div>{{quest.no}}%</div></td>
+						<td class='d_votes'>{{quest.votes}}</td>
+				</tr>
+			</table>
+			<div class='votemore'>
+				<div>You have voted on {{a_total}} of {{q_total}} possible opinions.</div>
+				<div>To see more results, <a href='/#/{{question}}/base'>Vote some more</a></div>
+			</div>
+		</div>
+	</div>
+</div>
